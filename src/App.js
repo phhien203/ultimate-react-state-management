@@ -1,17 +1,21 @@
 import React from "react";
 import "./App.css";
-import { AppProvider } from "./appContext";
-import { Content } from "./Content";
-import { Sidebar } from "./Sidebar";
+import { useDarkMode } from "./useDarkMode";
 
 function App() {
+  let isDarkMode = useDarkMode();
+
   return (
-    <AppProvider>
-      <div>
-        <Content />
-        <Sidebar />
-      </div>
-    </AppProvider>
+    <div
+      style={{
+        height: 500,
+        width: 500,
+        color: isDarkMode ? "white" : "black",
+        backgroundColor: isDarkMode ? "black" : "white",
+      }}
+    >
+      Here's some content
+    </div>
   );
 }
 
