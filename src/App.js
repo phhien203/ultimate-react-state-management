@@ -1,20 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { useDarkMode } from "./useDarkMode";
+import { usePicture } from "./usePicture";
 
 function App() {
-  let isDarkMode = useDarkMode();
+  const [date, setDate] = useState(`2020-06-09`);
+  const picture = usePicture(date);
+  console.log(picture);
+
+  if (!picture) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div
-      style={{
-        height: 500,
-        width: 500,
-        color: isDarkMode ? "white" : "black",
-        backgroundColor: isDarkMode ? "black" : "white",
-      }}
-    >
-      Here's some content
+    <div>
+      <input
+        type="date"
+        name="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <h2>{picture.title}</h2>
+      <p>{picture.explanation}</p>
+      <img src={picture.url} alt={picture.title} />
     </div>
   );
 }
