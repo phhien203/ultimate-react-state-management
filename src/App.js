@@ -4,10 +4,10 @@ import { usePicture } from "./usePicture";
 
 function App() {
   const [date, setDate] = useState(`2020-06-09`);
-  const picture = usePicture(date);
+  const { picture, loading } = usePicture(date);
   console.log(picture);
 
-  if (!picture) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
