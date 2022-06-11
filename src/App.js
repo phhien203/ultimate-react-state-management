@@ -1,29 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import { usePicture } from "./usePicture";
+import { useStorage } from "./hooks/useStorage";
 
 function App() {
-  const [date, setDate] = useState(`2020-06-09`);
-  const { picture, loading } = usePicture(date);
-  console.log(picture);
+  const [count, setCount] = useStorage("count", 0);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div>
-      <input
-        type="date"
-        name="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <h2>{picture.title}</h2>
-      <p>{picture.explanation}</p>
-      <img src={picture.url} alt={picture.title} />
-    </div>
-  );
+  return <div onClick={() => setCount(count + 1)}>The count is: {count}</div>;
 }
 
 export default App;
