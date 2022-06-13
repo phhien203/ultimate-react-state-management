@@ -1,26 +1,17 @@
+import { useCallback } from "react";
 import { useState } from "react";
 import "./App.css";
-import { usePicture } from "./usePicture";
+import { useComplete } from "./hooks/useComplete";
 
 function App() {
-  const [date, setDate] = useState(`2020-06-09`);
-  const { picture, loading } = usePicture(date);
+  const [clicked, setClicked] = useState();
+  const completeCallback = useCallback((data) => console.log(data), []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  useComplete(completeCallback);
 
   return (
-    <div>
-      <input
-        type="date"
-        name="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-      <h2>{picture.title}</h2>
-      <p>{picture.explanation}</p>
-      <img src={picture.url} alt={picture.title} />
+    <div onClick={() => setClicked(!clicked)}>
+      hello! {clicked ? "clicked" : "not clicked"}
     </div>
   );
 }
