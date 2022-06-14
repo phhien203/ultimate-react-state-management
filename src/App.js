@@ -1,17 +1,39 @@
-import { useCallback } from "react";
+import React from "react";
 import { useState } from "react";
+import Message from "./Message";
 import "./App.css";
-import { useComplete } from "./hooks/useComplete";
+
+const styles = {
+  wrapper: {
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  },
+  container: {
+    display: "flex",
+    overflow: "scroll",
+    height: "max-content",
+    flexDirection: "column",
+  },
+};
+
+const initialMessages = [
+  { id: 1, content: "Hello there!", from: "me" },
+  { id: 2, content: "How are you doing?", from: "Steven" },
+  { id: 3, content: "Pretty Good", from: "me" },
+];
 
 function App() {
-  const [clicked, setClicked] = useState();
-  const completeCallback = useCallback((data) => console.log(data), []);
-
-  useComplete(completeCallback);
+  const [messages, setMessages] = useState(initialMessages);
 
   return (
-    <div onClick={() => setClicked(!clicked)}>
-      hello! {clicked ? "clicked" : "not clicked"}
+    <div style={styles.wrapper}>
+      <div style={styles.container}>
+        {messages.map((message) => (
+          <Message key={message.id} message={message} />
+        ))}
+      </div>
     </div>
   );
 }
