@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Message from "./Message";
 import "./App.css";
+import Input from "./Input";
 
 const styles = {
   wrapper: {
@@ -26,6 +27,7 @@ const initialMessages = [
 
 function App() {
   const [messages, setMessages] = useState(initialMessages);
+  const [currentMessage, setCurrentMessage] = useState("");
 
   return (
     <div style={styles.wrapper}>
@@ -34,6 +36,18 @@ function App() {
           <Message key={message.id} message={message} />
         ))}
       </div>
+
+      <Input
+        value={currentMessage}
+        onChange={(content) => setCurrentMessage(content)}
+        onEnter={(content) => {
+          setCurrentMessage("");
+          setMessages([
+            ...messages,
+            { id: messages.length + 1, content, from: "me" },
+          ]);
+        }}
+      />
     </div>
   );
 }
