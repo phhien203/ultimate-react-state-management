@@ -5,6 +5,7 @@ import "./App.css";
 import Input from "./Input";
 import { useFakeMessage } from "./hooks/useFakeMessage";
 import { useFakeConvo } from "./hooks/useFakeConvo";
+import { useScrollToBottom } from "./hooks/useScrollToBottom";
 
 const styles = {
   wrapper: {
@@ -32,10 +33,11 @@ function App() {
   const [currentMessage, setCurrentMessage] = useState("");
   // useFakeMessage({ setMessages, message: "Hello from bot" });
   useFakeConvo(setMessages);
+  const scrollRef = useScrollToBottom(messages);
 
   return (
     <div style={styles.wrapper}>
-      <div style={styles.container}>
+      <div style={styles.container} ref={(ref) => (scrollRef.current = ref)}>
         {messages.map((message) => (
           <Message key={message.id} message={message} />
         ))}
