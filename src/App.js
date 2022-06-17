@@ -4,6 +4,7 @@ import Message from "./Message";
 import "./App.css";
 import Input from "./Input";
 import { useFakeMessage } from "./hooks/useFakeMessage";
+import { useFakeConvo } from "./hooks/useFakeConvo";
 
 const styles = {
   wrapper: {
@@ -29,7 +30,8 @@ const initialMessages = [
 function App() {
   const [messages, setMessages] = useState(initialMessages);
   const [currentMessage, setCurrentMessage] = useState("");
-  useFakeMessage({ setMessages, message: "Hello from bot" });
+  // useFakeMessage({ setMessages, message: "Hello from bot" });
+  useFakeConvo(setMessages);
 
   return (
     <div style={styles.wrapper}>
