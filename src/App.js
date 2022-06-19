@@ -3,7 +3,6 @@ import { useState } from "react";
 import Message from "./Message";
 import "./App.css";
 import Input from "./Input";
-import { useFakeMessage } from "./hooks/useFakeMessage";
 import { useFakeConvo } from "./hooks/useFakeConvo";
 import { useScrollToBottom } from "./hooks/useScrollToBottom";
 
